@@ -218,6 +218,14 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
 .cn-i { background:rgba(124,106,247,.18); color:var(--accent); }
 .comp-name { font-size:13px; font-weight:600; margin-bottom:2px; }
 .comp-diff { font-size:11px; color:var(--muted); }
+.comp-links { display:flex; gap:6px; margin-top:5px; flex-wrap:wrap; }
+.comp-link {
+  font-size:10px; padding:2px 7px; border-radius:10px;
+  text-decoration:none; font-weight:500;
+  background:rgba(255,255,255,0.05); border:1px solid var(--border);
+  color:var(--muted); transition:all .15s;
+}
+.comp-link:hover { background:rgba(124,106,247,0.15); border-color:var(--accent); color:var(--accent2); }
 
 .issue-row { display:flex; gap:12px; background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 15px; margin-bottom:8px; }
 .issue-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; margin-top:5px; }
@@ -483,22 +491,22 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
       <div class="grid-2">
         <div>
           <div style="font-size:11px;color:var(--danger);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;">● โดยตรง — ไม่เช็คเครดิต</div>
-          <div class="comp-row"><div class="comp-num cn-d">1</div><div><div class="comp-name">VnPhone</div><div class="comp-diff">54+ สาขา 500K+ ลูกค้า ใหญ่กว่า 10x</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-d">2</div><div><div class="comp-name">Ufriend</div><div class="comp-diff">Apple-only 30+ สาขา มี app + trade-in</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-d">3</div><div><div class="comp-name">Fastfone365</div><div class="comp-diff">ดาวน์ 1,596 บาท อนุมัติเป็นนาที</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-d">4</div><div><div class="comp-name">Marky Phone</div><div class="comp-diff">มีมือสอง หลายจังหวัด</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-d">5</div><div><div class="comp-name">MyCAll / FrenPhone</div><div class="comp-diff">iPhone focus, Bangkok ไม่มี content</div></div></div>
+          <div class="comp-row"><div class="comp-num cn-d">1</div><div><div class="comp-name">VnPhone</div><div class="comp-diff">54+ สาขา 500K+ ลูกค้า ใหญ่กว่า 10x</div><div class="comp-links"><a class="comp-link" href="https://www.vnphonemobile.com" target="_blank" rel="noopener">🌐 Website</a><a class="comp-link" href="https://www.facebook.com/vnphone3" target="_blank" rel="noopener">📘 Facebook</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-d">2</div><div><div class="comp-name">Ufriend</div><div class="comp-diff">Apple-only 30+ สาขา มี app + trade-in</div><div class="comp-links"><a class="comp-link" href="https://ufriend.shop" target="_blank" rel="noopener">🌐 Website</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-d">3</div><div><div class="comp-name">Fastfone365</div><div class="comp-diff">ดาวน์ 1,596 บาท อนุมัติเป็นนาที</div><div class="comp-links"><a class="comp-link" href="https://fastfone365.co.th" target="_blank" rel="noopener">🌐 Website</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-d">4</div><div><div class="comp-name">Marky Phone</div><div class="comp-diff">มีมือสอง หลายจังหวัด</div><div class="comp-links"><a class="comp-link" href="https://www.makeephone.com" target="_blank" rel="noopener">🌐 Website</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-d">5</div><div><div class="comp-name">MyCAll / FrenPhone</div><div class="comp-diff">iPhone focus, Bangkok ไม่มี content</div><div class="comp-links"><a class="comp-link" href="https://www.facebook.com/p/Mycall/61563529844452/" target="_blank" rel="noopener">📘 MyCAll</a><a class="comp-link" href="https://www.facebook.com/friendphone88/" target="_blank" rel="noopener">📘 FrenPhone</a></div></div></div>
           <div style="font-size:11px;color:var(--warn);text-transform:uppercase;letter-spacing:1px;margin:12px 0 7px;">● กึ่งตรง — มีเครดิตบ้าง</div>
-          <div class="comp-row"><div class="comp-num cn-s">7</div><div><div class="comp-name">Samsung Finance+</div><div class="comp-diff">3 นาที ดาวน์ 0 บาท Samsung เท่านั้น</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-s">8</div><div><div class="comp-name">Studio7 / iStudio</div><div class="comp-diff">0% ดอกเบี้ย ต้องมีบัตรเครดิต</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-s">9</div><div><div class="comp-name">BaNANA PayEasy</div><div class="comp-diff">True Money credit line 100K</div></div></div>
+          <div class="comp-row"><div class="comp-num cn-s">7</div><div><div class="comp-name">Samsung Finance+</div><div class="comp-diff">3 นาที ดาวน์ 0 บาท Samsung เท่านั้น</div><div class="comp-links"><a class="comp-link" href="https://www.samsung.com/th/finance-plus/" target="_blank" rel="noopener">🌐 Website</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-s">8</div><div><div class="comp-name">Studio7 / iStudio</div><div class="comp-diff">0% ดอกเบี้ย ต้องมีบัตรเครดิต</div><div class="comp-links"><a class="comp-link" href="https://www.studio7thailand.com" target="_blank" rel="noopener">🌐 Studio7</a><a class="comp-link" href="https://www.istudiobyspvi.com" target="_blank" rel="noopener">🌐 iStudio</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-s">9</div><div><div class="comp-name">BaNANA PayEasy</div><div class="comp-diff">True Money credit line 100K</div><div class="comp-links"><a class="comp-link" href="https://instore.bnn.in.th" target="_blank" rel="noopener">🌐 Website</a></div></div></div>
         </div>
         <div>
           <div style="font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px;">● ทางอ้อม</div>
-          <div class="comp-row"><div class="comp-num cn-i">11</div><div><div class="comp-name">Lazada/Shopee BNPL</div><div class="comp-diff">Online เท่านั้น ไม่มีหน้าร้าน</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-i">12</div><div><div class="comp-name">AIS/True Financing</div><div class="comp-diff">Carrier financing ต้องเป็นลูกค้า</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-i">13</div><div><div class="comp-name">CompAsia/Allo Allo</div><div class="comp-diff">Refurbished + installment มือสอง</div></div></div>
-          <div class="comp-row"><div class="comp-num cn-i">14</div><div><div class="comp-name">KTC / AEON</div><div class="comp-diff">Finance company ต้องมีบัตร</div></div></div>
+          <div class="comp-row"><div class="comp-num cn-i">11</div><div><div class="comp-name">Lazada / Shopee BNPL</div><div class="comp-diff">Online เท่านั้น ไม่มีหน้าร้าน</div><div class="comp-links"><a class="comp-link" href="https://www.lazada.co.th" target="_blank" rel="noopener">🌐 Lazada</a><a class="comp-link" href="https://shopee.co.th" target="_blank" rel="noopener">🌐 Shopee</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-i">12</div><div><div class="comp-name">AIS / True Financing</div><div class="comp-diff">Carrier financing ต้องเป็นลูกค้า</div><div class="comp-links"><a class="comp-link" href="https://www.ais.th/consumers/promotions/smart-pay/finance" target="_blank" rel="noopener">🌐 AIS</a><a class="comp-link" href="https://www.true.th/promotion/device-financing" target="_blank" rel="noopener">🌐 True</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-i">13</div><div><div class="comp-name">CompAsia / Allo Allo</div><div class="comp-diff">Refurbished + installment มือสอง</div><div class="comp-links"><a class="comp-link" href="https://compasia.co.th" target="_blank" rel="noopener">🌐 CompAsia</a><a class="comp-link" href="https://www.alloallo.com/th/" target="_blank" rel="noopener">🌐 Allo Allo</a></div></div></div>
+          <div class="comp-row"><div class="comp-num cn-i">14</div><div><div class="comp-name">KTC / AEON</div><div class="comp-diff">Finance company ต้องมีบัตร</div><div class="comp-links"><a class="comp-link" href="https://www.ktc.co.th" target="_blank" rel="noopener">🌐 KTC</a><a class="comp-link" href="https://www.aeon.co.th" target="_blank" rel="noopener">🌐 AEON</a></div></div></div>
           <br>
           <div class="table-wrap">
             <table>
