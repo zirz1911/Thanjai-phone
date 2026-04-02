@@ -18,7 +18,10 @@
   --text: #eeeef8;
   --muted: #7777aa;
   --font: 'Segoe UI', 'Noto Sans Thai', sans-serif;
+  --fs: 15px;
 }
+
+html { font-size: var(--fs); }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg); color: var(--text); font-family: var(--font); }
@@ -99,6 +102,43 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg);
   color: var(--muted);
   z-index: 100;
   letter-spacing: 1px;
+}
+
+#font-controls {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  z-index: 200;
+  background: rgba(22,22,31,0.85);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 8px;
+  backdrop-filter: blur(8px);
+}
+.fc-btn {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.fc-btn:hover { background: rgba(124,106,247,0.2); border-color: var(--accent); color: var(--text); }
+.fc-btn:disabled { opacity: 0.25; pointer-events: none; }
+#fs-label {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 28px;
+  text-align: center;
+  letter-spacing: 0.5px;
 }
 
 .slide-inner {
@@ -222,6 +262,11 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
 <button class="nav-btn" id="btn-next">›</button>
 <div id="dots"></div>
 <div id="counter"></div>
+<div id="font-controls">
+  <button class="fc-btn" id="fc-down" title="ลดขนาดตัวอักษร">A−</button>
+  <span id="fs-label">15px</span>
+  <button class="fc-btn" id="fc-up" title="เพิ่มขนาดตัวอักษร">A+</button>
+</div>
 
 <div class="deck" id="deck">
 
@@ -520,6 +565,23 @@ document.addEventListener('touchend',   e => {
 }, {passive:true});
 
 goTo(0);
+
+// Font size controls
+const sizes = [12, 13, 14, 15, 16, 17, 18, 20, 22];
+let fsIdx = 3; // default = 15px
+
+function applyFs() {
+  const sz = sizes[fsIdx];
+  document.documentElement.style.setProperty('--fs', sz + 'px');
+  document.getElementById('fs-label').textContent = sz + 'px';
+  document.getElementById('fc-down').disabled = fsIdx === 0;
+  document.getElementById('fc-up').disabled   = fsIdx === sizes.length - 1;
+}
+
+document.getElementById('fc-up').onclick   = () => { if (fsIdx < sizes.length-1) { fsIdx++; applyFs(); } };
+document.getElementById('fc-down').onclick = () => { if (fsIdx > 0)              { fsIdx--; applyFs(); } };
+
+applyFs();
 </script>
 </body>
 </html>
