@@ -104,6 +104,126 @@ html, body { width: 100%; height: 100%; overflow: hidden; background: var(--bg);
   letter-spacing: 1px;
 }
 
+/* ─── DETAIL PANEL ─── */
+#detail-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  z-index: 200;
+  background: rgba(22,22,31,0.85);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 6px 14px;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+#detail-btn:hover { border-color: var(--accent); color: var(--text); background: rgba(124,106,247,0.15); }
+
+#detail-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  pointer-events: none;
+}
+#detail-overlay.open { pointer-events: all; }
+
+#detail-backdrop {
+  flex: 1;
+  background: rgba(0,0,0,0);
+  transition: background 0.35s;
+  cursor: pointer;
+}
+#detail-overlay.open #detail-backdrop { background: rgba(0,0,0,0.6); }
+
+#detail-panel {
+  width: min(680px, 92vw);
+  height: 100vh;
+  background: var(--surface);
+  border-left: 1px solid var(--border);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.77,0,0.18,1);
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+#detail-overlay.open #detail-panel { transform: translateX(0); }
+
+#detail-panel::-webkit-scrollbar { width: 4px; }
+#detail-panel::-webkit-scrollbar-thumb { background: var(--border); }
+
+#detail-header {
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+#detail-header h2 { font-size: 15px; font-weight: 600; }
+#detail-close {
+  width: 30px; height: 30px;
+  border-radius: 50%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 16px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+#detail-close:hover { border-color: var(--danger); color: var(--danger); }
+
+#detail-body {
+  padding: 24px 28px 48px;
+  font-size: 13px;
+  line-height: 1.75;
+  color: var(--text);
+}
+#detail-body h2 { font-size: 16px; font-weight: 700; color: var(--accent); margin: 24px 0 10px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+#detail-body h2:first-child { margin-top: 0; }
+#detail-body h3 { font-size: 13px; font-weight: 600; color: var(--accent2); margin: 16px 0 8px; }
+#detail-body h4 { font-size: 12px; font-weight: 600; color: var(--accent3); margin: 12px 0 6px; }
+#detail-body p { color: var(--muted); margin-bottom: 8px; }
+#detail-body strong { color: var(--text); font-weight: 600; }
+#detail-body ul, #detail-body ol { padding-left: 18px; color: var(--muted); margin-bottom: 8px; }
+#detail-body li { padding: 2px 0; }
+#detail-body table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 10px 0; }
+#detail-body thead th { background: var(--surface2); color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .8px; padding: 7px 10px; text-align: left; border-bottom: 1px solid var(--border); }
+#detail-body tbody tr { border-bottom: 1px solid var(--border); }
+#detail-body tbody td { padding: 8px 10px; vertical-align: top; color: var(--muted); }
+#detail-body tbody td:first-child { color: var(--accent2); font-weight: 500; }
+#detail-body code, #detail-body pre { background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; padding: 2px 6px; font-size: 11px; color: var(--accent3); }
+#detail-body pre { padding: 12px 16px; display: block; overflow-x: auto; white-space: pre; }
+#detail-body blockquote { border-left: 3px solid var(--accent); padding: 8px 14px; background: rgba(124,106,247,.06); border-radius: 0 6px 6px 0; color: var(--muted); margin: 8px 0; }
+#detail-body hr { border: none; border-top: 1px solid var(--border); margin: 20px 0; }
+#detail-body a { color: var(--accent2); text-decoration: none; }
+#detail-body a:hover { text-decoration: underline; }
+
+#detail-source {
+  margin: 20px 0 0;
+  padding: 12px 16px;
+  background: rgba(124,106,247,.06);
+  border: 1px solid rgba(124,106,247,.2);
+  border-radius: 8px;
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#detail-source a { color: var(--accent); text-decoration: none; }
+#detail-source a:hover { text-decoration: underline; }
+
 #font-controls {
   position: fixed;
   top: 16px;
@@ -272,6 +392,154 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
 <button class="nav-btn" id="btn-next">›</button>
 <div id="dots"></div>
 <div id="counter"></div>
+
+<button id="detail-btn">📋 รายละเอียด</button>
+
+<div id="detail-overlay">
+  <div id="detail-backdrop"></div>
+  <div id="detail-panel">
+    <div id="detail-header">
+      <h2>📊 วิเคราะห์ธุรกิจ: ทันใจโฟน — ฉบับสมบูรณ์</h2>
+      <button id="detail-close">✕</button>
+    </div>
+    <div id="detail-body">
+      <div id="detail-source">
+        📌 ข้อมูลจาก <a href="https://github.com/zirz1911/Freyr-Oracle/issues/4" target="_blank" rel="noopener">GitHub Issue #4 — zirz1911/Freyr-Oracle</a>
+      </div>
+
+      <h2>1. ข้อมูลร้านค้า</h2>
+      <h3>ลักษณะธุรกิจ</h3>
+      <table><thead><tr><th>หัวข้อ</th><th>รายละเอียด</th></tr></thead><tbody>
+        <tr><td>ประเภท</td><td>ร้านผ่อนมือถือซับไพรม์ (Sub-prime Phone Installment)</td></tr>
+        <tr><td>กลุ่มเป้าหมาย</td><td>ลูกค้าที่ติด Blacklist / ไม่มีสลิปเงินเดือน / ไม่มีบัตรเครดิต</td></tr>
+        <tr><td>สาขา</td><td>บางนา / ลาดพร้าว-วังหิน / เมืองทอง / ลำลูกกา (กรุงเทพฯ)</td></tr>
+        <tr><td>รูปแบบ</td><td><strong>หน้าร้านเท่านั้น</strong> — ไม่มีออนไลน์ ไม่ส่งของ</td></tr>
+        <tr><td>เงื่อนไขอนุมัติ</td><td>บัตรประชาชนใบเดียว / ไม่เช็คเครดิตบูโร / อนุมัติ ~2 นาที</td></tr>
+        <tr><td>ดาวน์เริ่มต้น</td><td>2,500 บาท</td></tr>
+        <tr><td>Website</td><td><a href="https://tanjaiphone.com" target="_blank">tanjaiphone.com</a></td></tr>
+      </tbody></table>
+
+      <h3>จุดเด่น / จุดขาย</h3>
+      <table><thead><tr><th>จุดเด่น</th><th>รายละเอียด</th></tr></thead><tbody>
+        <tr><td>🚫 ไม่เช็คเครดิต</td><td>ติด Blacklist ก็ผ่าน — เปิดกว้างที่สุดในตลาด</td></tr>
+        <tr><td>⚡ อนุมัติเร็ว 2 นาที</td><td>ไม่รอนาน ไม่มีขั้นตอนยุ่งยาก</td></tr>
+        <tr><td>✅ สินค้าแท้มีประกัน</td><td>iPhone, Samsung — ศูนย์ไทยทุกเครื่อง</td></tr>
+        <tr><td>💰 ดาวน์ต่ำ</td><td>เริ่ม 2,500 บาท — เข้าถึงง่ายสำหรับ low-income</td></tr>
+        <tr><td>🎬 Content Marketing</td><td>ช่องหลักให้ความรู้ + ละครไวรัล — strategy ที่ไม่มีคู่แข่งทำเหมือน</td></tr>
+        <tr><td>🔓 ไม่มี iCloud ฝัง</td><td>ลูกค้าล็อกอิน Apple ID ของตัวเองได้ทันที ไม่ถูกล็อคเครื่องโดยร้าน</td></tr>
+        <tr><td>🤝 ไม่ประจานลูกค้า</td><td>ไม่โพสรูป/ชื่อลูกค้าผิดนัดบน Social Media</td></tr>
+        <tr><td>🛡️ สินค้าจริง ไม่โอนก่อน</td><td>มีสต็อกจริงที่ร้าน ถึงวันนัดค่อยมารับ ลดความเสี่ยงถูกโกง</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>2. สินค้าที่จำหน่าย</h2>
+      <table><thead><tr><th>ประเภท</th><th>แบรนด์</th><th>หมายเหตุ</th></tr></thead><tbody>
+        <tr><td>Smartphone</td><td>iPhone (ทุก Series), Samsung Galaxy</td><td>สินค้าหลัก</td></tr>
+        <tr><td>Tablet</td><td>iPad</td><td>ขายควบคู่</td></tr>
+      </tbody></table>
+      <p><strong>เงื่อนไข:</strong> ดาวน์เริ่ม 2,500 บาท · ระยะผ่อนยืดหยุ่น · ติด GPS ในเครื่อง · ดอกเบี้ยไม่เปิดเผย</p>
+      <p><strong>สินค้าขายดี:</strong> iPhone รุ่นกลาง-ล่าง + Samsung mid-range</p>
+
+      <hr>
+      <h2>3. วิธีการขาย</h2>
+      <pre>เห็น Content TikTok/Facebook
+        ↓
+DM / โทรถาม
+        ↓
+Walk-in หน้าร้าน
+        ↓
+กรอกใบสมัคร + บัตรประชาชน
+        ↓
+อนุมัติ 2 นาที → รับเครื่องทันที
+        ↓
+ผ่อนรายเดือน (มี GPS ในเครื่อง)</pre>
+      <table><thead><tr><th>กลยุทธ์</th><th>รายละเอียด</th></tr></thead><tbody>
+        <tr><td>Drama Content</td><td>มือถือลวงรัก, ผ่อนรักซ้อนงวด — awareness แบบ entertainment</td></tr>
+        <tr><td>Pain Point</td><td>"บัตรประชาชนใบเดียว", "ติดแบล็คลิสต์ก็ผ่าน"</td></tr>
+        <tr><td>Speed USP</td><td>"อนุมัติทันใจ 2 นาที" — ชื่อร้านสื่อสาร positioning</td></tr>
+        <tr><td>Multi-Page FB</td><td>V2 = "ดาวน์ถูก" / V4 = "บัตรประชาชนใบเดียว"</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>4. แพลตฟอร์มหาลูกค้า</h2>
+      <table><thead><tr><th>แพลตฟอร์ม</th><th>Account</th><th>ข้อมูล</th></tr></thead><tbody>
+        <tr><td>TikTok ช่องหลัก</td><td><a href="https://www.tiktok.com/@tanjaiphone" target="_blank">@tanjaiphone</a></td><td>116.5K followers / 1.1M likes</td></tr>
+        <tr><td>TikTok ละคร</td><td><a href="https://www.tiktok.com/@lakorntanjai" target="_blank">@lakorntanjai</a></td><td>Viral drama content</td></tr>
+        <tr><td>Facebook Main</td><td><a href="https://www.facebook.com/tanjaiphoneofficial" target="_blank">tanjaiphoneofficial</a></td><td>Official page หลัก</td></tr>
+        <tr><td>Facebook V2</td><td><a href="https://www.facebook.com/tanjaiphoneV2" target="_blank">tanjaiphoneV2</a></td><td>"ดาวน์ถูก"</td></tr>
+        <tr><td>Facebook V4</td><td><a href="https://www.facebook.com/tanjaiphonev4" target="_blank">tanjaiphonev4</a></td><td>"บัตรประชาชนใบเดียว"</td></tr>
+        <tr><td>Instagram</td><td><a href="https://www.instagram.com/tanjaiphoneofficial" target="_blank">tanjaiphoneofficial</a></td><td>Secondary channel</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>5. Content Strategy — ช่องหลัก @tanjaiphone</h2>
+      <table><thead><tr><th></th><th>@tanjaiphone (ช่องหลัก)</th><th>@lakorntanjai (ช่องละคร)</th></tr></thead><tbody>
+        <tr><td>เป้าหมาย</td><td>ให้ความรู้ → Trust → Convert</td><td>Awareness / Viral</td></tr>
+        <tr><td>รูปแบบ</td><td>เจ้าของออกหน้าเองทุกคลิป</td><td>นักแสดง / ละครสั้น</td></tr>
+        <tr><td>Tone</td><td>Honest, เป็นกันเอง</td><td>Drama, Entertaining</td></tr>
+        <tr><td>Conversion</td><td>สูง — คนไว้ใจคน</td><td>ต่ำกว่า — reach กว้าง</td></tr>
+      </tbody></table>
+      <h4>📊 เปรียบ iPhone รุ่นไหนดี / คุ้ม</h4>
+      <p>เทียบ camera, battery, chip ในแบบที่เข้าใจง่าย สำหรับคนมีงบจำกัดที่ต้องการ maximize ความคุ้มค่า</p>
+      <h4>⚠️ คำเตือนก่อนผ่อน</h4>
+      <p>GPS fee, ค่าปรับ, ดอกเบี้ยจริง — Radical transparency สร้าง trust มากกว่าโฆษณา</p>
+      <h4>🔍 รีวิวตามงบ + อายุการใช้งาน</h4>
+      <p>"งบ 5,000 ดาวน์ควรเลือกรุ่นไหน" — จากมุมคนผ่อน ลด anxiety ก่อนตัดสินใจ</p>
+      <h4>👤 เจ้าของออกหน้าเองทุกคลิป</h4>
+      <p>สร้าง Personal Brand + Brand ร้านไปพร้อมกัน — ลูกค้า Walk-in รู้สึกรู้จักกันแล้วก่อนถึงร้าน</p>
+      <table><thead><tr><th>จุดพัฒนา</th><th>คำแนะนำ</th></tr></thead><tbody>
+        <tr><td>ไม่มี CTA ท้ายคลิป</td><td>เพิ่ม "DM มาได้เลย" หรือ "สาขาใกล้บ้านคุณ"</td></tr>
+        <tr><td>ไม่มี Link in Bio ชัด</td><td>ใส่ LINE OA หรือ WhatsApp ใน bio</td></tr>
+        <tr><td>Post ไม่ consistent</td><td>กำหนด 3-5 วัน/สัปดาห์</td></tr>
+        <tr><td>ไม่มี Playlist</td><td>จัดหมวด: "เปรียบรุ่น", "ก่อนผ่อน", "รีวิว"</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>6. กลุ่มคู่แข่ง</h2>
+      <h3>คู่แข่งโดยตรง (ไม่เช็คเครดิต)</h3>
+      <table><thead><tr><th>#</th><th>ชื่อ</th><th>Scale</th><th>ต่างจากทันใจโฟน</th></tr></thead><tbody>
+        <tr><td>1</td><td><a href="https://www.vnphonemobile.com" target="_blank">VnPhone</a></td><td>54+ สาขา 500K+ ลูกค้า</td><td>Scale ใหญ่กว่า 10x ไม่มี content</td></tr>
+        <tr><td>2</td><td><a href="https://ufriend.shop" target="_blank">Ufriend</a></td><td>30+ สาขา</td><td>Apple-only มี app + trade-in</td></tr>
+        <tr><td>3</td><td><a href="https://fastfone365.co.th" target="_blank">Fastfone365</a></td><td>กลาง</td><td>ดาวน์ต่ำกว่า (1,596 บาท)</td></tr>
+        <tr><td>4</td><td><a href="https://www.makeephone.com" target="_blank">Marky Phone</a></td><td>กลาง</td><td>มีมือสอง หลายจังหวัด</td></tr>
+        <tr><td>5</td><td>MyCAll / FrenPhone</td><td>เล็ก</td><td>iPhone focus ไม่มี content</td></tr>
+      </tbody></table>
+      <h3>คู่แข่งกึ่งตรง + ทางอ้อม</h3>
+      <table><thead><tr><th>#</th><th>ชื่อ</th><th>ต่างจากทันใจโฟน</th></tr></thead><tbody>
+        <tr><td>7</td><td><a href="https://www.samsung.com/th/finance-plus/" target="_blank">Samsung Finance+</a></td><td>ดาวน์ 0 บาท Samsung เท่านั้น</td></tr>
+        <tr><td>8</td><td><a href="https://www.studio7thailand.com" target="_blank">Studio7</a> / <a href="https://www.istudiobyspvi.com" target="_blank">iStudio</a></td><td>0% ต้องมีบัตรเครดิต</td></tr>
+        <tr><td>9</td><td><a href="https://instore.bnn.in.th" target="_blank">BaNANA PayEasy</a></td><td>True Money credit line 100K</td></tr>
+        <tr><td>11</td><td><a href="https://www.lazada.co.th" target="_blank">Lazada</a> / <a href="https://shopee.co.th" target="_blank">Shopee BNPL</a></td><td>Online เท่านั้น</td></tr>
+        <tr><td>12</td><td>AIS / True Financing</td><td>ต้องเป็นลูกค้า carrier</td></tr>
+        <tr><td>13</td><td><a href="https://compasia.co.th" target="_blank">CompAsia</a> / <a href="https://www.alloallo.com/th/" target="_blank">Allo Allo</a></td><td>Refurbished มือสอง</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>⚠️ Issues ที่พบ</h2>
+      <table><thead><tr><th>ประเด็น</th><th>รายละเอียด</th><th>ความเสี่ยง</th></tr></thead><tbody>
+        <tr><td>ค่าปรับ GPS ไม่ชัดเจน</td><td>Pantip ร้องเรียน fee ไม่ transparent</td><td style="color:var(--danger)">สูง</td></tr>
+        <tr><td>Debt Collection ร้องเรียน</td><td>รีวิวเรื่องการทวงหนี้บน Pantip</td><td style="color:var(--danger)">สูง</td></tr>
+        <tr><td>Scale เล็กกว่า VnPhone</td><td>4 สาขา vs 54+</td><td style="color:var(--warn)">กลาง</td></tr>
+        <tr><td>Content ไม่มี CTA ชัด</td><td>ไม่มี link/call-to-action ท้ายคลิป</td><td style="color:var(--warn)">กลาง</td></tr>
+        <tr><td>Multi-Page ไม่ centralized</td><td>V1/V2/V4 → engagement กระจาย</td><td style="color:var(--accent3)">ต่ำ</td></tr>
+      </tbody></table>
+
+      <hr>
+      <h2>💡 สรุป Positioning</h2>
+      <blockquote>ทันใจโฟน อยู่ใน "Blue Zone" ที่ไม่มีใครทำได้เหมือน</blockquote>
+      <ul>
+        <li>✅ Sub-prime ไม่เช็คเครดิต</li>
+        <li>✅ Education Content + Viral Drama — ไม่มีใครทำ</li>
+        <li>✅ เจ้าของเป็น Face of Brand → Personal Trust</li>
+        <li>✅ Multi-brand ทุกแบรนด์</li>
+        <li>❌ Scale ยังเล็ก + ไม่มีระบบ Digital</li>
+        <li>❌ Fee ไม่ transparent + CTA ไม่ชัด</li>
+      </ul>
+      <blockquote><strong>"Content King ที่ยังต้องแปลง Awareness → Revenue ให้มีประสิทธิภาพกว่านี้"</strong></blockquote>
+    </div>
+  </div>
+</div>
+
 <div id="font-controls">
   <button class="fc-btn" id="fc-down" title="ลดขนาดตัวอักษร">A−</button>
   <span id="fs-label">15px</span>
@@ -731,6 +999,15 @@ document.getElementById('fc-up').onclick   = () => { if (fsIdx < sizes.length-1)
 document.getElementById('fc-down').onclick = () => { if (fsIdx > 0)              { fsIdx--; applyFs(); } };
 
 applyFs();
+
+// Detail panel
+const overlay = document.getElementById('detail-overlay');
+document.getElementById('detail-btn').onclick     = () => overlay.classList.add('open');
+document.getElementById('detail-backdrop').onclick = () => overlay.classList.remove('open');
+document.getElementById('detail-close').onclick   = () => overlay.classList.remove('open');
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') overlay.classList.remove('open');
+});
 </script>
 </body>
 </html>
