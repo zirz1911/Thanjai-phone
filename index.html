@@ -198,10 +198,12 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
 .f-bot { background:rgba(126,232,162,.12); border:1px solid rgba(126,232,162,.3); color:var(--accent3); }
 .f-arrow { color:var(--muted); font-size:14px; padding:1px 0; line-height:1; }
 
-.channel-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 15px; }
+.channel-card { background:var(--surface); border:1px solid var(--border); border-radius:10px; padding:13px 15px; text-decoration:none; display:block; transition:border-color .2s, transform .2s; }
+.channel-card:hover { border-color:var(--accent2); transform:translateY(-2px); }
 .ch-platform { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.8px; }
 .ch-handle { font-size:13px; font-weight:600; color:var(--accent2); margin:3px 0; }
 .ch-stat { font-size:11px; color:var(--accent3); }
+.ch-link-icon { font-size:10px; color:var(--muted); margin-top:5px; }
 
 .content-block { border-left:3px solid var(--accent); background:var(--surface); border-radius:0 10px 10px 0; padding:13px 15px; margin-bottom:8px; }
 .content-block h4 { font-size:13px; font-weight:600; margin-bottom:3px; }
@@ -389,12 +391,42 @@ tbody td:first-child { font-weight:500; color:var(--accent2); white-space:nowrap
       <div class="slide-sub">Social Media · Online · Offline</div>
       <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">ออนไลน์</div>
       <div class="grid-3" style="margin-bottom:18px;">
-        <div class="channel-card"><div class="ch-platform">TikTok · ช่องหลัก</div><div class="ch-handle">@tanjaiphone</div><div class="ch-stat">116.5K followers · 1.1M likes</div></div>
-        <div class="channel-card"><div class="ch-platform">TikTok · ละคร</div><div class="ch-handle">@lakorntanjai</div><div class="ch-stat">Viral drama content</div></div>
-        <div class="channel-card"><div class="ch-platform">Facebook · Main</div><div class="ch-handle">tanjaiphoneofficial</div><div class="ch-stat">Official page หลัก</div></div>
-        <div class="channel-card"><div class="ch-platform">Facebook · V2</div><div class="ch-handle">tanjaiphoneV2</div><div class="ch-stat">"ดาวน์ถูก"</div></div>
-        <div class="channel-card"><div class="ch-platform">Facebook · V4</div><div class="ch-handle">tanjaiphonev4</div><div class="ch-stat">"บัตรประชาชนใบเดียว"</div></div>
-        <div class="channel-card"><div class="ch-platform">Instagram</div><div class="ch-handle">tanjaiphoneofficial</div><div class="ch-stat">Secondary channel</div></div>
+        <a class="channel-card" href="https://www.tiktok.com/@tanjaiphone" target="_blank" rel="noopener">
+          <div class="ch-platform">🎵 TikTok · ช่องหลัก</div>
+          <div class="ch-handle">@tanjaiphone</div>
+          <div class="ch-stat">116.5K followers · 1.1M likes</div>
+          <div class="ch-link-icon">↗ เปิดใน TikTok</div>
+        </a>
+        <a class="channel-card" href="https://www.tiktok.com/@lakorntanjai" target="_blank" rel="noopener">
+          <div class="ch-platform">🎵 TikTok · ละคร</div>
+          <div class="ch-handle">@lakorntanjai</div>
+          <div class="ch-stat">Viral drama content</div>
+          <div class="ch-link-icon">↗ เปิดใน TikTok</div>
+        </a>
+        <a class="channel-card" href="https://www.facebook.com/tanjaiphoneofficial" target="_blank" rel="noopener">
+          <div class="ch-platform">📘 Facebook · Main</div>
+          <div class="ch-handle">tanjaiphoneofficial</div>
+          <div class="ch-stat">Official page หลัก</div>
+          <div class="ch-link-icon">↗ เปิดใน Facebook</div>
+        </a>
+        <a class="channel-card" href="https://www.facebook.com/tanjaiphoneV2" target="_blank" rel="noopener">
+          <div class="ch-platform">📘 Facebook · V2</div>
+          <div class="ch-handle">tanjaiphoneV2</div>
+          <div class="ch-stat">"ดาวน์ถูก"</div>
+          <div class="ch-link-icon">↗ เปิดใน Facebook</div>
+        </a>
+        <a class="channel-card" href="https://www.facebook.com/tanjaiphonev4" target="_blank" rel="noopener">
+          <div class="ch-platform">📘 Facebook · V4</div>
+          <div class="ch-handle">tanjaiphonev4</div>
+          <div class="ch-stat">"บัตรประชาชนใบเดียว"</div>
+          <div class="ch-link-icon">↗ เปิดใน Facebook</div>
+        </a>
+        <a class="channel-card" href="https://www.instagram.com/tanjaiphoneofficial" target="_blank" rel="noopener">
+          <div class="ch-platform">📸 Instagram</div>
+          <div class="ch-handle">tanjaiphoneofficial</div>
+          <div class="ch-stat">Secondary channel</div>
+          <div class="ch-link-icon">↗ เปิดใน Instagram</div>
+        </a>
       </div>
       <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">ออฟไลน์</div>
       <div class="table-wrap">
