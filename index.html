@@ -566,14 +566,17 @@ document.addEventListener('touchend',   e => {
 
 goTo(0);
 
-// Font size controls
-const sizes = [12, 13, 14, 15, 16, 17, 18, 20, 22];
-let fsIdx = 3; // default = 15px
+// Font size controls — use zoom to scale all px-based CSS
+const sizes = [0.7, 0.8, 0.9, 1.0, 1.1, 1.2, 1.35, 1.5, 1.7];
+const labels = ['70%','80%','90%','100%','110%','120%','135%','150%','170%'];
+let fsIdx = 3; // default = 100%
 
 function applyFs() {
-  const sz = sizes[fsIdx];
-  document.documentElement.style.setProperty('--fs', sz + 'px');
-  document.getElementById('fs-label').textContent = sz + 'px';
+  const scale = sizes[fsIdx];
+  document.querySelectorAll('.slide-inner, .hero-inner').forEach(el => {
+    el.style.zoom = scale;
+  });
+  document.getElementById('fs-label').textContent = labels[fsIdx];
   document.getElementById('fc-down').disabled = fsIdx === 0;
   document.getElementById('fc-up').disabled   = fsIdx === sizes.length - 1;
 }
